@@ -1,0 +1,39 @@
+version: '3.6'
+services:
+    node-typescript:
+        build: .
+        image: "node-typescript"
+
+    node-typescript-dev:
+        image: "node:11.11-alpine"
+        stdin_open: true
+        tty: true
+        volumes:
+            - .:/app
+        command: ["sh","-c","cd /app && yarn install && yarn dev-watch"]
+    
+    node-typescript-dev-debug:
+        image: "node:11.11-alpine"
+        stdin_open: true
+        tty: true
+        volumes:
+            - .:/app
+        command: ["sh","-c","cd /app && yarn install && yarn dev-debug"]
+    
+    node-typescript-run:
+        image: "node:11.11-alpine"
+        stdin_open: true
+        tty: true
+        volumes:
+            - .:/app
+        command: ["sh","-c","cd /app && yarn install && yarn run-watch"]
+    
+    node-typescript-run-debug:
+        image: "node:11.11-alpine"
+        stdin_open: true
+        tty: true
+        volumes:
+            - .:/app
+        command: ["sh","-c","cd /app && yarn install && yarn run-debug"]
+        
+    

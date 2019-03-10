@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "ES2016",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "strict": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "inlineSourceMap": true,
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "sourceRoot": "src",
+    "baseUrl": ".",
+    "paths": {
+      "src/*": [
+        "src/*"
+      ],
+      "test/*": [
+        "test/*"
+      ],
+      "package.json": [
+        "package.json"
+      ]
+    }
+  }
+}
