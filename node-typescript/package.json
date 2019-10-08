@@ -6,13 +6,9 @@
   "author": "Tamás Rusz",
   "license": "MIT",
   "scripts": {
-    "start": "yarn run",
-    "run": "./scripts/scripts-run.sh",
-    "run-watch": "./scripts/scripts-run-watch.sh",
-    "run-debug": "./scripts/scripts-run-debug.sh",
-    "dev": "./scripts/scripts-dev.sh",
-    "dev-watch": "./scripts/scripts-dev-watch.sh",
-    "dev-debug": "./scripts/scripts-dev-debug.sh",
+    "start": "./scripts/scripts-run.sh",
+    "start-watch": "./scripts/scripts-run-watch.sh",
+    "start-debug": "./scripts/scripts-run-debug.sh",
     "lint": "./scripts/scripts-lint.sh",
     "compile": "./scripts/scripts-compile.sh"
   },

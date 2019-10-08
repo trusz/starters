@@ -4,4 +4,4 @@ DIR=$(dirname $(readlink -f $0))
 nodemon \
     --watch $DIR/../src \
     -e ts \
-    --exec "clear; npm run dev"
+    --exec "clear; yarn start"
