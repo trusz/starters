@@ -8,6 +8,8 @@ services:
         image: "node:11.11-alpine"
         stdin_open: true
         tty: true
+        ports:
+            - "3000:3000"
         volumes:
             - .:/app
         command: ["sh","-c","cd /app && yarn install && yarn dev-watch"]
@@ -16,6 +18,8 @@ services:
         image: "node:11.11-alpine"
         stdin_open: true
         tty: true
+        ports:
+            - "3000:3000"
         volumes:
             - .:/app
         command: ["sh","-c","cd /app && yarn install && yarn dev-debug"]
@@ -24,6 +28,8 @@ services:
         image: "node:11.11-alpine"
         stdin_open: true
         tty: true
+        ports:
+            - "3000:3000"
         volumes:
             - .:/app
         command: ["sh","-c","cd /app && yarn install && yarn run-watch"]
@@ -32,6 +38,8 @@ services:
         image: "node:11.11-alpine"
         stdin_open: true
         tty: true
+        ports:
+            - "3000:3000"
         volumes:
             - .:/app
         command: ["sh","-c","cd /app && yarn install && yarn run-debug"]
