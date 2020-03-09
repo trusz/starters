@@ -3,6 +3,7 @@ services:
   ui-lib:
     image: "ui-lib"
     build: .
+  
   ui-lib-run:
     image: "node:13.10"
     stdin_open: true
@@ -13,3 +14,14 @@ services:
     ports: 
         - 6006:6006
     command: ["sh", "-c", "yarn start"]
+
+  ui-lib-dev:
+    image: "node:13.10"
+    stdin_open: true
+    tty: true
+    working_dir: "/app"
+    volumes: 
+        - ./:/app
+    ports: 
+        - 6006:6006
+    command: ["sh", "-c", "yarn start"]  
