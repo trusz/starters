@@ -1,11 +1,17 @@
 build:
 	docker-compose build ui-lib
-	docker-compose down
 
 run:
-	docker-compose run --service-ports --use-aliases --rm ui-lib-run
-	docker-compose down
+	$(eval export docker_image := run)
+	make _start
 
 dev: 
-	docker-compose run --service-ports --use-aliases --rm ui-lib-dev
-	docker-compose down	
+	$(eval export docker_image := dev)
+	make _start
+
+# don't start this
+_start:
+	echo "args" $@
+	docker-compose run --service-ports --use-aliases --rm ui-lib-${docker_image}
+	docker-compose down
+
