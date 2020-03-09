@@ -1,9 +1,19 @@
 import * as React from 'react'
 
-export function Button(props: Props) {
-    return <button onClick={props.onClick} >Hi I am a button</button>
+export function Button(props: React.PropsWithChildren<Props>) {
+
+    const {
+        onClick = noopOnClick,
+        children,
+    } = props;
+
+    return <button onClick={onClick} >
+        {children}
+    </button>
 }
 
 interface Props {
-    onClick(): void
+    onClick?: () => void
 }
+
+function noopOnClick() { }
