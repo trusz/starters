@@ -1,3 +1,6 @@
+# 1. copy makefile
+# 2. replace `__name__` with the service name
+# 3. remove this comment block from the new makefile 
 build:
 	docker-compose build __name__
 
