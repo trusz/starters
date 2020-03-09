@@ -15,4 +15,4 @@ Projects starters for different projects
 
 ## Front End
 
-2. UI Lib: [React + Storybook+ TypeScrupt](./web-frontend/react-storybook-typescript)
+1. UI Lib: [React + Storybook+ TypeScrupt](./web-frontend/react-storybook-typescript)
