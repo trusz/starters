@@ -1,20 +1,26 @@
 # 1. copy makefile
 # 2. replace `__name__` with the service name
 # 3. remove this comment block from the new makefile 
-build:
-	docker-compose build __name__
+build: _name
+	@docker-compose build ${name}
 
 run:
 	$(eval export docker_image := run)
-	make _start
+	@make _start
 
 dev: 
 	$(eval export docker_image := dev)
-	make _start
+	@make _start
 
-# don't start this
-_start:
-	echo "args" $@
-	docker-compose run --service-ports --use-aliases --rm __name__-${docker_image}
-	docker-compose down
+exec: 
+	$(eval export docker_image := dev)
+	$(eval export cmd := sh)
+	@make _start
 
+# do not start these: these are configurations and templates
+_start: _name
+	@docker-compose run --service-ports --use-aliases --rm ${name}-${docker_image}
+	@docker-compose down
+
+_name: 
+	$(eval export name := __name__)
