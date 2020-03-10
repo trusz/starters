@@ -5,13 +5,7 @@ import * as wait from './wait'
 
 
 before(async () => {
-    try {
-        const timeoutMS = 10 * 1000
-        await wait.forHostPort("localhost", 6006, timeoutMS)
-    } catch (err) {
-        console.error(err)
-        assert.fail("server not started in time")
-    }
+    await waitForDevServer()
 })
 
 afterEach(async () => {
@@ -21,6 +15,30 @@ afterEach(async () => {
 })
 
 after(async () => {
+    // TODO: rename start to single
     const b = await startBrowser()
     await b.close()
 })
+
+async function waitForDevServer(): Promise<void> {
+
+    const timeoutMS = parseInt(toDefault(process.env.TEST_DEV_SERVER_TIMEOUT, "10000"))
+    const host = toDefault(process.env.TEST_DEV_SERVER_HOST, "localhost")
+    const port = parseInt(toDefault(process.env.TEST_DEV_SERVER_PORT, "6006"))
+
+    try {
+        await wait.forHostPort(host, port, timeoutMS)
+    } catch (err) {
+        console.error(err)
+        assert.fail("server not started in time")
+    }
+}
+
+function toDefault(value: string | undefined, defaultValue: string): string {
+
+    if (!value) {
+        return defaultValue
+    }
+
+    return value
+}
