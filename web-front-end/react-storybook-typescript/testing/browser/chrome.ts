@@ -18,16 +18,22 @@ export class Chrome {
     }
 
     public async sleep(ms: number): Promise<void> {
-        await this.page.waitFor(ms)
+        return this.page.waitFor(ms)
     }
 
+    // we cannot simply return, because `goto` returns something
+    // and we want void
     public async open(url: string): Promise<void> {
         await this.page.goto(url)
 
     }
 
     public async close(): Promise<void> {
-        await this.browser.close()
+        return this.browser.close()
+    }
+
+    public async closePage(): Promise<void> {
+        return this.page.close()
     }
 
     public async click(selector: string): Promise<void> {
@@ -43,6 +49,8 @@ export class Chrome {
         return text
     }
 
+    // we cannot simply return, because `waitFor` returns something
+    // and we want void
     private async waitFor(selector: string): Promise<void> {
         await this.page.waitFor(selector)
     }

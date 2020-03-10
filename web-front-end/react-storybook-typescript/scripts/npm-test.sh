@@ -4,5 +4,5 @@ mocha \
     --extension ts,tsx \
     --timeout 60*1000 \
     -r ts-node/register \
-"./test-helpers/setup.ts" \
+"./testing/setup.ts" \
 "./src/**/*spec.ts"

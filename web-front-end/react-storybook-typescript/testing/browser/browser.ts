@@ -2,6 +2,7 @@ export interface Browser {
     // Basics
     open(url: string): Promise<void>
     sleep(ms: number): Promise<void>
+    closePage(): Promise<void>
     close(): Promise<void>
 
     // Actions

@@ -3,11 +3,15 @@ import { startBrowser } from './index'
 
 before(() => {
 
-    console.log("before all");
+})
+
+afterEach(async () => {
+    const b = await startBrowser()
+    await b.closePage()
+
 })
 
 after(async () => {
     const b = await startBrowser()
     await b.close()
-    console.log("after all");
 })

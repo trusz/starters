@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./scripts/npm-test.sh",
-    "link-test-helpers": "yarn link ./test-helpers",
     "start": "start-storybook --ci -p 6006",
-    "build-storybook": "build-storybook",
-    "postinstall": "yarn link-test-helpers"
+    "build": "build-storybook",
+    "test": "./scripts/npm-test.sh",
+    "local-links": "./script/npm-local-links.sh",
+    "postinstall": "./scripts/npm-postinstall.sh"
   },
   "keywords": [],
   "author": "",
