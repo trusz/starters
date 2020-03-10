@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "test": "./scripts/npm-test.sh",
+    "link-test-helpers": "yarn link ./test-helpers",
+    "start": "start-storybook --ci -p 6006",
+    "build-storybook": "build-storybook",
+    "postinstall": "yarn link-test-helpers"
   },
   "keywords": [],
   "author": "",
@@ -15,9 +17,16 @@
   "devDependencies": {
     "@babel/core": "^7.8.6",
     "@storybook/react": "^5.3.14",
+    "@types/chai": "^4.2.10",
+    "@types/mocha": "^7.0.2",
     "@types/node": "^13.7.7",
+    "@types/puppeteer": "^2.0.1",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
+    "chai": "^4.2.0",
+    "mocha": "^7.1.0",
+    "puppeteer": "^2.1.1",
+    "ts-node": "^8.6.2",
     "typescript": "^3.8.3"
   }
 }

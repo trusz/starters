@@ -7,9 +7,13 @@ export function Button(props: React.PropsWithChildren<Props>) {
         children,
     } = props;
 
-    return <button onClick={onClick} >
-        {children}
-    </button>
+    return (
+        <button
+            access-id="button"
+            onClick={onClick} >
+            {children}
+        </button>
+    )
 }
 
 interface Props {

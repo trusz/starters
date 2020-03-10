@@ -30,10 +30,10 @@ export const TestOnClick = () => {
         <div>
             <Button
                 onClick={() => setText("clicked")}
-                a11y-id="button">
+            >
                 Click to set text
                 </Button>
-            <div id="text-target">{text}</div>
+            <div access-id="text-target">{text}</div>
         </div>
     )
 }
