@@ -1,14 +1,15 @@
 {
-  "name": "ui-lib-01",
+  "name": "react-storybook-typescript",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "start": "start-storybook --ci -p 6006",
     "build": "build-storybook",
     "test": "./scripts/npm-test.sh",
+    "test-watcher": "./scripts/npm-test-watcher.sh",
     "local-links": "./script/npm-local-links.sh",
-    "postinstall": "./scripts/npm-postinstall.sh"
+    "postinstall": "./scripts/npm-postinstall.sh",
+    "concurrently": "concurrently"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +25,7 @@
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
     "chai": "^4.2.0",
+    "concurrently": "^5.1.0",
     "mocha": "^7.1.0",
     "puppeteer": "^2.1.1",
     "ts-node": "^8.6.2",

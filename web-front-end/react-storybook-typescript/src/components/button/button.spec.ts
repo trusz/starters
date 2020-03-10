@@ -9,6 +9,7 @@ describe("Button", () => {
                 desc: 'has effect',
                 expectedText: 'clicked'
             },
+
         ]
 
         clickTests.forEach(testClick)

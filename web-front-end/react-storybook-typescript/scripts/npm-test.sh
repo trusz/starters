@@ -1,8 +1,6 @@
 
-mocha \
-    --watch \
-    --extension ts,tsx \
-    --timeout 60*1000 \
-    -r ts-node/register \
-"./testing/setup.ts" \
-"./src/**/*spec.ts"
+yarn concurrently \
+    --prefix-colors blue,green \
+    --names FE,TEST \
+    --kill-others \
+"yarn start" "yarn test-watcher"
