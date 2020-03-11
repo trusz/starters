@@ -13,7 +13,7 @@ services:
         - ./:/app
     ports: 
         - 6006:6006
-    command: ["sh", "-c", "yarn start"]
+    command: ["sh", "-c", "yarn install && yarn start"]
 
   ui-lib-dev:
     image: "node:13.10"
@@ -24,4 +24,4 @@ services:
         - ./:/app
     ports: 
         - 6006:6006
-    command: ["sh", "-c", "yarn start"]  
+    command: ["sh", "-c", "yarn install && yarn test"]  

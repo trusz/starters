@@ -1,13 +1,16 @@
 {
   "name": "react-storybook-typescript",
   "version": "1.0.0",
+  "engines": {
+    "node": ">=13.10"
+  },
   "description": "",
   "scripts": {
     "start": "start-storybook --ci -p 6006",
-    "build": "build-storybook",
+    "build": "build-storybook -c .storybook -o build",
     "test": "./scripts/npm-test.sh",
     "test-watcher": "./scripts/npm-test-watcher.sh",
-    "local-links": "./script/npm-local-links.sh",
+    "local-links": "./scripts/npm-local-links.sh",
     "postinstall": "./scripts/npm-postinstall.sh",
     "concurrently": "concurrently"
   },

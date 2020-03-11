@@ -18,7 +18,7 @@ describe("Button", () => {
             it(tc.desc, async () => {
                 const buttonSelector = 'button[access-id="button"]'
                 const textSelector = '[access-id="text-target"]'
-                const isHeadless = false
+                const isHeadless = true
 
                 const b = await startBrowser(isHeadless)
                 await b.open('http://localhost:6006/iframe.html?id=components-button--test-on-click')
@@ -36,3 +36,4 @@ describe("Button", () => {
 
     })
 })
+
