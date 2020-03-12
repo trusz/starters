@@ -31,7 +31,7 @@ export const TestOnClick = () => {
             <Button
                 onClick={() => setText("clicked")}
             >
-                Click to set text
+                Click to set text 1
                 </Button>
             <div access-id="text-target">{text}</div>
         </div>

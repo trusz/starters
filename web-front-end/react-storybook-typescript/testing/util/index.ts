@@ -1,0 +1,1 @@
+export { toDefault } from './to-default'

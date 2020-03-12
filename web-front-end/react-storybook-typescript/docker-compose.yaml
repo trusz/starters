@@ -24,4 +24,22 @@ services:
         - ./:/app
     ports: 
         - 6006:6006
-    command: ["sh", "-c", "yarn install && yarn test"]  
+    environment: 
+      - PUPPETEER_URL=http://host.docker.internal:9922
+      - CI=false
+    command: ["sh", "-c", "yarn install && yarn tdd"]
+
+  ui-lib-test:
+    build:
+      context: .
+      dockerfile: "test.Dockerfile"
+    depends_on:
+      - ui-lib
+    stdin_open: true
+    tty: true
+    working_dir: "/app"
+    volumes: 
+        - ./:/app
+    ports: 
+        - 9922:9922
+    command: ["sh", "-c", "yarn install && yarn test"]

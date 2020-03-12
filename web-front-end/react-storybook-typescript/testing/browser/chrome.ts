@@ -1,21 +1,92 @@
 import * as puppeteer from 'puppeteer'
+import fetch from 'node-fetch'
+import * as url from 'url'
 
 export class Chrome {
     private browser: puppeteer.Browser
     private page: puppeteer.Page
-    private isHeadless: boolean
+    private slowMo: number
 
-    public static async New(isHeadless?: boolean): Promise<Chrome> {
-        const ch = new Chrome(isHeadless)
-        ch.browser = await puppeteer.launch({ headless: ch.isHeadless });
+    /**
+     * 
+     * A factory function used because the creation of a browser is async
+     * and constructors cannot be async.
+     * 
+     */
+    public static async New(
+        isHeadless: boolean = true,
+        puppeteerUrl: string,
+        slowMo: number = 0,
+    ): Promise<Chrome> {
+        const ch = new Chrome()
+        ch.slowMo = slowMo
+
+        if (!puppeteerUrl) {
+            ch.browser = await ch.launch(isHeadless)
+        } else {
+            ch.browser = await ch.connect(puppeteerUrl)
+        }
+
         ch.page = await ch.browser.newPage();
 
         return ch
     }
 
-    private constructor(isHeadless: boolean = true) {
-        this.isHeadless = isHeadless
+    private async launch(isHeadless: boolean): Promise<puppeteer.Browser> {
+        console.log('launching chrome: is headless?', isHeadless);
+        const browser = await puppeteer.launch({
+            headless: isHeadless,
+            slowMo: this.slowMo,
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+        });
+
+        return browser
     }
+
+    /**
+     * 
+     * `puppeteer.connect` has the option (`browserURL`) just to give it an url
+     * and it can fetch the websocket itself.
+     * The problem is that websocket's host is 127.0.0.1 (localhost)
+     * but when we use `connect`, the tests are running a container
+     * and we have to replace it with `host.docker.internal`
+     * So we fetch the websocket ourself.
+     * 
+     */
+    private async connect(puppeteerUrl: string): Promise<puppeteer.Browser> {
+
+        const browserWSEndpoint = await this.fetchBrowserWSEndpoint(puppeteerUrl)
+        const browser = await puppeteer.connect(
+            {
+                browserWSEndpoint,
+                slowMo: this.slowMo,
+            },
+        );
+
+        return browser
+    }
+
+
+    private async fetchBrowserWSEndpoint(puppeteerUrl: string) {
+        const pu = new url.URL(puppeteerUrl)
+        const port = pu.port
+        const headerHost = `127.0.0.1:${port}`
+
+        pu.pathname = "/json/version"
+
+        const resp = await fetch(pu.href, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Host': headerHost,
+            },
+        })
+        const result = await resp.json()
+        const wsURL = result.webSocketDebuggerUrl
+        const dockerizedURL = wsURL.replace(/127.0.0.1/g, 'host.docker.internal')
+
+        return dockerizedURL
+    }
+
 
     public async sleep(ms: number): Promise<void> {
         return this.page.waitFor(ms)
@@ -30,6 +101,11 @@ export class Chrome {
 
     public async close(): Promise<void> {
         return this.browser.close()
+    }
+
+    public async closeAllPages(): Promise<void> {
+        const pages = await this.browser.pages()
+        await Promise.all(pages.map(page => page.close()))
     }
 
     public async closePage(): Promise<void> {

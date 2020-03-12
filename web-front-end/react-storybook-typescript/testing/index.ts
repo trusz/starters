@@ -1,11 +1,2 @@
-import { Browser, Chrome } from './browser'
-
-let browser: Browser;
-
-export async function startBrowser(isHeadless?: boolean): Promise<Browser> {
-    if (!browser) {
-        browser = await Chrome.New(isHeadless)
-    }
-
-    return browser
-}
+export { startBrowser } from './start-browser'
+export { baseUrl } from './base-url'

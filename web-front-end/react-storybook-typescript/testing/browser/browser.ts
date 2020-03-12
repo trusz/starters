@@ -3,6 +3,7 @@ export interface Browser {
     open(url: string): Promise<void>
     sleep(ms: number): Promise<void>
     closePage(): Promise<void>
+    closeAllPages(): Promise<void>
     close(): Promise<void>
 
     // Actions

@@ -1,7 +1,8 @@
-import { before, after } from 'mocha'
+import { before } from 'mocha'
 import * as assert from 'assert'
 import { startBrowser } from './index'
 import * as wait from './wait'
+import { toDefault } from './util'
 
 
 before(async () => {
@@ -10,21 +11,18 @@ before(async () => {
 
 afterEach(async () => {
     const b = await startBrowser()
-    await b.closePage()
+    await b.closeAllPages()
 
 })
 
-after(async () => {
-    // TODO: rename start to single
-    const b = await startBrowser()
-    await b.close()
-})
 
 async function waitForDevServer(): Promise<void> {
 
     const timeoutMS = parseInt(toDefault(process.env.TEST_DEV_SERVER_TIMEOUT, "10000"))
     const host = toDefault(process.env.TEST_DEV_SERVER_HOST, "localhost")
     const port = parseInt(toDefault(process.env.TEST_DEV_SERVER_PORT, "6006"))
+
+    console.log(`waiting for UI at ${host}:${port}`);
 
     try {
         await wait.forHostPort(host, port, timeoutMS)
@@ -34,11 +32,3 @@ async function waitForDevServer(): Promise<void> {
     }
 }
 
-function toDefault(value: string | undefined, defaultValue: string): string {
-
-    if (!value) {
-        return defaultValue
-    }
-
-    return value
-}

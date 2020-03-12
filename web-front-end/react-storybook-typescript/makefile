@@ -8,6 +8,11 @@ run:
 
 dev: 
 	$(eval export docker_image := dev)
+	@./scripts/launch-local-browser.sh && \
+	make _start
+
+test:
+	$(eval export docker_image := test)
 	@make _start
 
 exec: 
