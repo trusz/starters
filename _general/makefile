@@ -12,6 +12,10 @@ dev:
 	$(eval export docker_image := dev)
 	@make _start
 
+test:
+	$(eval export docker_image := test)
+	@make _start
+
 exec: 
 	$(eval export docker_image := dev)
 	$(eval export cmd := sh)
@@ -19,8 +23,10 @@ exec:
 
 # do not start these: these are configurations and templates
 _start: _name
-	@docker-compose run --service-ports --use-aliases --rm ${name}-${docker_image}
-	@docker-compose down
+	@docker-compose run \
+	--service-ports \
+	--use-aliases \
+	--rm ${name}-${docker_image} ${cmd}
 
 _name: 
 	$(eval export name := __name__)
