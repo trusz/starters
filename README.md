@@ -16,3 +16,10 @@ Starter Kits for different technology combinations
 
 1. [React + Storybook+ TypeScript](./react-storybook-typescript) (RST)  
   Good for UI-Libs and Apps
+
+----
+
+Brought to you by
+
+[![SprintEins](./_assets/sprinteins_logo_black_s.png)](https://www.sprinteins.com)  
+[https://www.sprinteins.com](https://www.sprinteins.com)
