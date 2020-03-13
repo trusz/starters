@@ -14,5 +14,5 @@ Starter Kits for different technology combinations
 
 ## Front End
 
-1. [React + Storybook+ TypeScript](./web-front-end/react-storybook-typescript) (RST)  
+1. [React + Storybook+ TypeScript](./react-storybook-typescript) (RST)  
   Good for UI-Libs and Apps
