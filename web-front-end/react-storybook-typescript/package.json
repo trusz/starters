@@ -10,6 +10,7 @@
     "build": "build-storybook -c .storybook -o build",
     "test": "./scripts/npm-test.sh",
     "tdd": "./scripts/npm-tdd.sh",
+    "tdd-ui": "./scripts/npm-tdd-ui.sh",
     "test-watcher": "./scripts/npm-test-watcher.sh",
     "test-ci": "./scripts/npm-test-ci.sh",
     "local-links": "./scripts/npm-local-links.sh",
