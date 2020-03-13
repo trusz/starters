@@ -9,7 +9,23 @@ export async function startBrowser(slowMo: number = 0): Promise<Browser> {
         const isHeadless = !CI || (CI === "true")
 
         browser = await Chrome.New(isHeadless, puppeteerUrl, slowMo)
+
+        registerNodeHooks(browser)
     }
 
     return browser
+}
+
+
+function registerNodeHooks(b: Browser) {
+
+    // do something when app is closing
+    process.on('exit', () => b.closeAllPages());
+
+    // catches ctrl+c event
+    process.on('SIGINT', () => b.closeAllPages());
+
+    // catches "kill pid" (for example: nodemon restart)
+    process.on('SIGUSR1', () => b.closeAllPages());
+    process.on('SIGUSR2', () => b.closeAllPages());
 }
